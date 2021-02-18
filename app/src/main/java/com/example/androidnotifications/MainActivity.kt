@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(contentText)
                 .setContentText(contentTitle)
+                .setStyle(NotificationCompat.BigTextStyle().bigText("Bacon ipsum dolor amet ball tip hamburger corned beef, turkey fatback beef cow strip steak venison meatloaf bacon pastrami. Frankfurter ball tip sausage, andouille beef shankle chicken drumstick. Ball tip flank bacon, pig cow leberkas frankfurter alcatra drumstick rump tri-tip turkey fatback picanha. Meatloaf buffalo pork beef pastrami cupim porchetta flank meatball prosciutto turkey beef ribs frankfurter pork loin. T-bone cow venison pig, beef ribs chislic turducken. Swine pig pastrami corned beef picanha cupim. Pork loin chislic venison pork salami jerky pork chop beef turducken ball tip porchetta filet mignon chicken rump turkey."))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
 
