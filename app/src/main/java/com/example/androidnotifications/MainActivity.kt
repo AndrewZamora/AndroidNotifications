@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import kotlin.random.Random
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createRegularNotification(contentTitle: String, contentText: String, channelId: String) {
-//        https://material.io/design/platform-guidance/android-notifications.html#anatomy-of-a-notification
+        //https://material.io/design/platform-guidance/android-notifications.html#anatomy-of-a-notification
         // Create an explicit intent for an Activity in your app
         val intent = Intent(this, MainActivity::class.java)
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -48,11 +49,22 @@ class MainActivity : AppCompatActivity() {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(contentText)
                 .setContentText(contentTitle)
-                .setStyle(NotificationCompat.BigTextStyle().bigText("Bacon ipsum dolor amet ball tip hamburger corned beef, turkey fatback beef cow strip steak venison meatloaf bacon pastrami. Frankfurter ball tip sausage, andouille beef shankle chicken drumstick. Ball tip flank bacon, pig cow leberkas frankfurter alcatra drumstick rump tri-tip turkey fatback picanha. Meatloaf buffalo pork beef pastrami cupim porchetta flank meatball prosciutto turkey beef ribs frankfurter pork loin. T-bone cow venison pig, beef ribs chislic turducken. Swine pig pastrami corned beef picanha cupim. Pork loin chislic venison pork salami jerky pork chop beef turducken ball tip porchetta filet mignon chicken rump turkey."))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
 
         // Not the best way to create a unique ID but a unique ID is needed to prevent the last notification from being overwritten
+        val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
+        notificationManager.notify(uniqueId, notificationBuilder.build())
+    }
+
+    private  fun createCustomNotification() {
+        val notificationLayoutExpanded = RemoteViews(packageName, R.layout.custom_notification_large)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationBuilder = NotificationCompat.Builder(this, "Default")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+//                .setCustomContentView(notificationLayout)
+                .setCustomBigContentView(notificationLayoutExpanded)
         val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
         notificationManager.notify(uniqueId, notificationBuilder.build())
     }
