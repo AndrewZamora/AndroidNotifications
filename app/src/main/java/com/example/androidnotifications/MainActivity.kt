@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button_regular).setOnClickListener{ view ->
             createRegularNotification("Regular Notification Title","Regular Notification Text", "Default")
         }
+        findViewById<Button>(R.id.button_custom).setOnClickListener{ view ->
+            createCustomNotification()
+        }
     }
 
     private fun createNotificationChannel() {
