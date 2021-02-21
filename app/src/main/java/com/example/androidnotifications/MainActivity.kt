@@ -61,12 +61,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private  fun createCustomNotification() {
+        val notificationLayout = RemoteViews(packageName, R.layout.custom_notification_small)
         val notificationLayoutExpanded = RemoteViews(packageName, R.layout.custom_notification_large)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationBuilder = NotificationCompat.Builder(this, "Default")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-//                .setCustomContentView(notificationLayout)
+                .setCustomContentView(notificationLayout)
                 .setCustomBigContentView(notificationLayoutExpanded)
         val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
         notificationManager.notify(uniqueId, notificationBuilder.build())
