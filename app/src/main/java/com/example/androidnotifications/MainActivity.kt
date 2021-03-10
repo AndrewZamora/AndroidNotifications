@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         notificationManager.notify(uniqueId, notificationBuilder.build())
     }
 
-    private  fun createCustomNotification() {
+    private fun createCustomNotification() {
         val notificationLayout = RemoteViews(packageName, R.layout.custom_notification_small)
         val notificationLayoutExpanded = RemoteViews(packageName, R.layout.custom_notification_large)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -69,6 +69,18 @@ class MainActivity : AppCompatActivity() {
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(notificationLayout)
                 .setCustomBigContentView(notificationLayoutExpanded)
+        val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
+        notificationManager.notify(uniqueId, notificationBuilder.build())
+    }
+
+    private fun createYoutubeNotification() {
+        val notificationLayout = RemoteViews(packageName, R.layout.custom_notification_small)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationBuilder = NotificationCompat.Builder(this, "Default")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(notificationLayout)
+//                .setCustomBigContentView(notificationLayoutExpanded)
         val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
         notificationManager.notify(uniqueId, notificationBuilder.build())
     }
