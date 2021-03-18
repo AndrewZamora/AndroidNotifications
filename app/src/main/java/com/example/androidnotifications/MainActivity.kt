@@ -19,11 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createNotificationChannel()
-        findViewById<Button>(R.id.button_regular).setOnClickListener{ view ->
+        findViewById<Button>(R.id.button_regular).setOnClickListener{
             createRegularNotification("Regular Notification Title","Regular Notification Text", "Default")
         }
-        findViewById<Button>(R.id.button_custom).setOnClickListener{ view ->
+        findViewById<Button>(R.id.button_custom).setOnClickListener{
             createCustomNotification()
+        }
+        findViewById<Button>(R.id.button_youtube).setOnClickListener{
+            createYoutubeNotification()
         }
     }
 
@@ -74,13 +77,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createYoutubeNotification() {
-        val notificationLayout = RemoteViews(packageName, R.layout.custom_notification_small)
+        val notificationLayout = RemoteViews(packageName, R.layout.youtube_notification_small)
+        val notificationLayoutExpanded = RemoteViews(packageName, R.layout.custom_notification_large)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationBuilder = NotificationCompat.Builder(this, "Default")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(notificationLayout)
-//                .setCustomBigContentView(notificationLayoutExpanded)
+                .setCustomBigContentView(notificationLayoutExpanded)
         val uniqueId = Random(System.currentTimeMillis()).nextInt(1000)
         notificationManager.notify(uniqueId, notificationBuilder.build())
     }
